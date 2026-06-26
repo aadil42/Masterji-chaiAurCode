@@ -5,22 +5,17 @@ class Solution {
 
     for (let i = 0; i < asteroids.length; i++) {
         let currAst = asteroids[i];
-        let continueOuterLoop = false;
         
-        while (stack.length && this.willColide(stack[stack.length - 1], currAst)) {
+        if (stack.length && this.willColide(stack[stack.length - 1], currAst)) {
             if (Math.abs(stack[stack.length - 1]) === Math.abs(currAst)) {
-                continueOuterLoop = true;
                 stack.pop();
-                break;
+                continue;
             }
             if (Math.abs(stack[stack.length - 1]) < Math.abs(currAst)) {
                 stack.pop();
             }
-            if (Math.abs(stack[stack.length - 1]) > Math.abs(currAst)) break;
         }
 
-        if (continueOuterLoop) continue;
-        
         if (!stack.length) {
             stack.push(currAst);
             continue;
@@ -52,7 +47,6 @@ class Solution {
        return false;
    }
 }
-
 const inst = new Solution();
 const asteroids = [5,-1,2,-2,10,-8];
 
